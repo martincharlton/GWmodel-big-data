@@ -19,7 +19,20 @@
 #    are 4 independent variabes.  It takes ~140 seconds per
 #    iteration for 9 iterations for fit the model
 # 
-# 
+# Issues
+# ======
+# Kernel: we're restricted to a bisquare kernel at the moment, because
+#         I'm using RANN to access a 2-dtree for the nearest neighbour
+#         searches
+#
+# Memory: Because of this we need a matrix of size N x n where n is the
+#         upper limit on the number of nearest neighbours in the
+#         calibration procedure.  On my XP system this puts a
+#         limit of about 250. That's about 58,000,000 cells in the 
+#         array.   IF a larger number is required, we'll have to
+#         start splitting the problem.  Split into two for 500 nns,
+#         four for 1000 nns and so on. 
+#
 #
 library(GWmodel)
 library(RANN)
