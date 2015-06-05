@@ -1,6 +1,26 @@
 #
 # Big GW experiments
 #
+# Version 1.0 - Martin Charlton, Maynooth University
+# Licensed under GPL V3: https://gnu.org/licenses/gpl.html
+#
+# Use this at your own risk - this is totally experimental to see
+# whether it's possible to run GWR on reasonably large problems
+#
+# Test system is a Dell Precision T7400 with a 3.16GHz
+#   Intel Xeon X5460 CPU running Windows XP SP3. 
+#   It has 3.25Gb of RAM
+#
+# OAC example takes ~400 seconds per iteration for 11 iterations
+#   to fit the test model with 3 independent variables and
+#   232296 observations
+#
+# The property price data has 77299 observations and there
+#    are 4 independent variabes.  It takes ~140 seconds per
+#    iteration for 9 iterations for fit the model
+# 
+# 
+#
 library(GWmodel)
 library(RANN)
 library(rgdal)
