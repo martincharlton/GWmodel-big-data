@@ -1,5 +1,5 @@
 #
-# Big GW experiments
+# Big GW experiments - in the sandbox
 #
 # Version 1.0 - Martin Charlton, Maynooth University
 # Licensed under GPL V3: https://gnu.org/licenses/gpl.html
@@ -379,24 +379,24 @@ legend(-30000, 1250000, legend=names(attr(colcode, "table")),
 ##############################################################################
 
 setwd("H:/OAC_2011")    # office
-nwData90 <- read.table("GWRmerge90.dat",header=F,sep=" ",stringsAsFactors=F)
-colnames(nwData90) <- c("Easting","Northing","Purprice","BldIntWr","BldPostW","Bld60s",
+Data90 <- read.table("GWRmerge90.dat",header=F,sep=" ",stringsAsFactors=F)
+colnames(Data90) <- c("Easting","Northing","Purprice","BldIntWr","BldPostW","Bld60s",
  "Bld70s","Bld80s","TypDetch","TypSemiD","TypFlat","GarSingl","GarDoubl","Tenfree",
  "CenHeat","BathTwo","BedTwo","BedThree","BedFour","BedFive","NewPropD","FlorArea",
  "NoCarHh","CarspP","ProfPct","UnskPct","RetiPct","Saleunem","Unemploy","PopnDnsy")
 
-NWspdf <- SpatialPointsDataFrame(data.frame(nwData90$Easting,nwData90$Northing),
-                                 data.frame(nwData90$Easting, nwData90$Northing,nwData90$Purprice,
-                                            nwData90$FlorArea,nwData90$TypDetch,nwData90$TypSemiD,nwData90$TypFlat))
+D90spdf <- SpatialPointsDataFrame(data.frame(Data90$Easting, Data90$Northing),
+                                  data.frame(Data90$Easting, Data90$Northing,Data90$Purprice,
+                                             Data90$FlorArea,Data90$TypDetch,Data90$TypSemiD,Data90$TypFlat))
 
 yvar  <- 3
 xvars <- 4:7
 xL    <- 250
 xU    <- 500
 
-bw.opt  <- calib.big(NWspdf,yvar,xvars,xL,xU)
+bw.opt  <- calib.big(D90spdf,yvar,xvars,xL,xU)
 
-betaHat <- gwr.big(NWspdf,yvar,xvars,bw.opt)
+betaHat <- gwr.big(D90spdf,yvar,xvars,bw.opt)
 
 ###
 ### Plot some parameter estimates
@@ -407,9 +407,9 @@ nclr    <- 8
 plotclr <- rev(brewer.pal(nclr,"Spectral"))
 class   <- classIntervals(plotvar, nclr, style="quantile")
 colcode <- findColours(class, plotclr)
-plot(NWspdf,pch=16,cex=0.25,col=colcode)
+plot(D90spdf,pch=16,cex=0.25,col=colcode)
 plot(ewoutline,add=T)
 title("NW Housing Data: Floor Area Parameter Variation")
 
-plot(nwData90$FlorArea,nwData90$Purprice,pch=16,cex=0.25,col=colcode)
+plot(Data90$FlorArea,Data90$Purprice,pch=16,cex=0.25,col=colcode)
 
